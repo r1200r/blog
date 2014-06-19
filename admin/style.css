@@ -94,13 +94,19 @@ form.login
 form.add_article
 
 {
-width:400px;
+width:350px;
 /*border: solid 1px red;*/
 margin: 10px 0px 30px 30px;
 padding: 5px;
 background: #EFFBFF;
 border: dotted 2px gray;
+border-radius: 10px;
+background: rgba(149, 217, 154, 0.4);
 
+color: #0000ff;
+transition-property: background;
+transition-duration:1.9s;
+transition-timing-fonction: ease;
 }
 
 table.articles td, table.articles th        /* pour encadré le titre et l'entete du tableau*/

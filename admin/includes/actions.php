@@ -53,3 +53,29 @@ if (isset($_GET["action"]) && $_GET["action"] === "deconnection") { // GET en MA
 	unset($_SESSION["user"]);
 	header("location: login.php");
 	}
+	
+	if (isset($_POST["action"]) && $_POST["action"] === "edit_article"){  //addArticle doit etre ecrit pareille que dans add_article
+	$title = $_POST["title"];
+	$text = $_POST["text"];
+	$idarticle = $_GET['id_article'];
+	
+	$messages = array();
+	if (empty($title)){
+	$messages["title"] = "veuillez saisir un titre";
+
+	}
+	if (empty($text)){
+		$messages["text"] = "veuillez saisir un article";
+	}
+	if (count($messages) === 0){
+		mysql_query("UPDATE articles SET title='" . mysql_real_escape_string($title) ."', text='". mysql_real_escape_string($text)."' WHERE id_article=" . mysql_real_escape_string($idarticle)); //or die(mysql_error());exit;(pour voir les erreur dans mysql
+			header("location: gestion_articles.php");
+		}
+}	
+			
+		
+if (isset($_GET["action"]) && $_GET["action"] === "delete_article"){
+		mysql_query('DELETE FROM articles WHERE id_article=' . mysql_real_escape_string($_GET['id_article']));
+	
+	header("location: gestion_articles.php");
+	}
