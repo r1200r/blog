@@ -1,0 +1,200 @@
+*{
+	border: 0;    /* une rénitialisation de la pages*/
+	margin: 0;
+	padding: 0;
+	}
+	
+h2
+{
+padding 8px 0;
+margin: 10px 0px 0px 30px;
+
+}
+
+.centre
+{
+text-align: center
+
+}
+
+p
+{
+padding 5px 0;
+
+}
+
+hr
+{
+ border-top: dotted 2px gray;
+}
+
+table 
+{
+border-collapse: collapse;
+	
+}
+
+body{
+	font-family:arial, sans-serif;
+	font-size: 12px;
+	}
+
+h1
+{
+	font-size:30px;
+	color: black;
+	padding: 8px;
+	height: 50px;
+	background: rgba(50, 100, 100, 0.4);
+	text-align: center
+ } 
+ 
+input,  textarea, select, button
+	{
+		padding : 2px;
+		
+	}
+	
+input.arrondi
+{
+border-radius : 8px;
+}
+
+button
+		{
+		border-radius: 10px;
+		height: 30;
+		line-height: 24px
+		padding: 0 5px;
+		cursor: pointer;
+		
+		
+		}
+		
+button:hover{
+		background: #48D1CC
+}
+form fieldset
+	
+	{
+		border: 50;
+		
+	}
+	
+form.login 
+	{
+		
+		width: 340px; /* pas d'éspace entre 300 px*/
+		margin: auto;
+		background: #EFFBFF;
+		border-radius: 10px;
+		/*text-align: right;*/
+	}
+	
+form.add_article
+
+{
+width:400px;
+/*border: solid 1px red;*/
+margin: 10px 0px 30px 30px;
+padding: 5px;
+background: #EFFBFF;
+border: dotted 2px gray;
+
+}
+
+table.articles td, table.articles th        /* pour encadré le titre et l'entete du tableau*/
+{
+border: solid 1px gray;
+}
+		
+form fieldset.action  /* le bouton est calé a droit*/
+	{
+		text-align: right;
+		padding-right: 10px;
+		
+	
+	}
+	
+form  fieldset.fields div.row /* class que lon nome specialement on rajoute une div avec un margin pour voir les div differante 
+								cette div ne peut etre que dans un fieldset .fields */
+	{
+		/*margin: 10px 0;*/
+		/*background: yellow;*/
+		padding: 10px;
+		/*border: solid 1px red;*/
+	
+	}
+	
+form fieldset.fields div.row label    /* on rajoute login pour que le style reste dans la page login*/
+	
+	{
+		display: inline-block;
+		width: 102px;
+		/*background: yellow;*/
+		text-align: center;
+	
+	
+	}
+	header 
+	{
+		height: 100px;
+		/*border: solid 1px red;*/
+		 /*background-color: rgba(0, 0, 255, 0.1);/* bandeau gris sur adim*/
+		/*height: 88px; /* cela permet que le bandeau ne bouge pas */
+	}
+
+header nav{
+			
+			background: rgba(100, 100, 100, 0.4);
+			min-width: 600px;
+			
+			}		
+	
+
+	
+header nav ul
+	{
+		list-style: none;
+		
+	}
+	
+header nav ul li.deconnexion
+{
+	float: right;
+	border: none;
+}
+	
+
+
+/* menu en ligne horizontal*/
+header nav ul li
+	{
+	/*display:inline-block;*/
+	display: block;
+	float: left;
+	height: 28px;
+	line-height: 28px; /* centre le text*/
+	border-right: solid 1px #0033CC;
+	}
+	
+header nav ul li a
+	{
+		 display:inline-block;
+		text-decoration: none; /* enleve le soulignement (accuil decoration  gestion des articles)*/
+
+		color: #0000ff;
+		transition-property: background;
+		transition-duration: 0.9s;
+		transition-timing-fonction: ease;
+		font-size: 14px;
+		padding: 0 5px;    /* attention 0 est une marge en haut et en bat 5 coté mais le vrais H, D, B, G */
+		border-radius: 8px;
+		text-shadow: 1px 1px 2px #0099FF;
+	}
+header nav ul li a:hover
+	{
+		text-decoration: underline;
+		background: rgba(100,100, 100, 0.5);
+		
+	}
