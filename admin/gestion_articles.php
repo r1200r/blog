@@ -1,43 +1,16 @@
 ﻿<?php
 	require_once("includes/authenticated.php");
-	include_once("includes/header.php");
 	include_once("includes/actions.php");
-	$title = "Gestion des articles"; 
-	$query = mysql_query('select id_article, title, date FROM articles');
 	
-?>
-
-<h2>Gestion des articles</h2>
-
-<div class="action">
-	<a href="add_article.php">Ajouter un article</a>
+	if (isset($_GET['action']) && $_GET['action'] === 'delete_article') {
+	mysql_query("DELETE FROM articles WHERE id_article=" . mysql_real_escape_string($_GET['id_article']));
 	
-</div>
-
-<table class='articles'>
-	<thead>
-		<th style='width: 40px;'>ID</th>
-		<th style='width: 200px;'>Titre</th>
-		<th style='width: 200px;'>Date</th>
-		<th style='width: 200px;'>Action</th>
-		<th style='while: 200px;'>suppretion</th>
-	</thead>
-	<?php
-		while ($row = mysql_fetch_assoc($query)){
-		echo '
-			<tr>
-				<td>' . $row['id_article'] . '</td>
-				<td>' .$row ['title'] . '</td>
-				<td>' .$row ['date'] . '</td>
-				<td>
-					<a href="edit_article.php?id_article=' .$row['id_article'] . '">Modifier</a><!-- rajoute modifier dans le champs action-->
-				</td>
-				<td><a href="gestion_articles.php?action=delete_article&id_article=' .$row['id_article'] . '">supprimer</a>
-				</td>
-				</tr>
-		';
-	}
-	?>
-				
-</table>
-<?php include_once('includes/footer.php');?>
+	header("Location: gestion_articles.php");
+}
+	
+$articles = mysql_query('select id_article, title, date FROM articles');
+	
+$title = "Gestion des articles"; 
+include_once("includes/header.php");
+require_once('views/gestion_articles.view.php');
+include_once('includes/footer.php');

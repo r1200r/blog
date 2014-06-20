@@ -1,63 +1,43 @@
 <?php
-
+	
+	$title = "Modifier un article";
 	require_once("includes/authenticated.php");
 	include_once("includes/actions.php");
-	$title = "Modifier un article";
-	include_once("includes/header.php"); 
 	
-	$query = mysql_query ("SELECT title, text FROM articles WHERE id_article=" . mysql_real_escape_string ($_GET['id_article']));
-	$article = mysql_fetch_assoc($query);
+		$query = mysql_query ("SELECT title, text FROM articles WHERE id_article=" . mysql_real_escape_string ($_GET['id_article']));
+		$article = mysql_fetch_assoc($query);
 	if ($article === false) {
 		header("Location: gestion_articles.php");
 		}
-?>
-
-
-<h2>Modifier un article</h2>
-<form class='edit_article' action="edit_article.php?id_article=<?php echo $_GET['id_article']; ?> " method="post">
-	<input type="hidden" name="action" value="edit_article" /> <!-- addArticle doit etre ecrit pareille que dans action -->
-	<fieldset class="fields">
-		<div class="row">
-			<label for="title">Titre</label>
-			<input type="text" name="title" value="<?php
-				if (isset($_POST["title"])) {
-					echo $_POST["title"];
-				}
-				else {
-					echo $article['title'];
-					}
-			?>"/>
-			
-		<?php if (isset($messages) && isset($messages["title"])){
-			echo '<div class="error">' . $messages["title"] . "</div>"; // '<div class="error">' pas de double cote entre div et fermeture de la div
-			//sinon c est pas bon
-			} ?>
-		</div>
-		<div class="row">
-		<label for="text">Text</label>
-		<textarea name="text"><?php
-				if (isset($_POST["text"])) { // POST EN MAJUSCULE
-					echo $_POST["text"];
-			}
-			
-			else {
-					echo $article['text'];
-					}
-			
-			?></textarea>
-			
-			<?php if (isset($messages) && isset($messages["text"])){
-			echo '<div class="error">' . $messages["text"] . "</div>"; 
-			
-			} ?>
-				
-			
-		</div>
-	</fieldset>	
+		$articletitle = $article['title'];
+		$articletext = $article['text'];
+		
+	if (isset($_POST["action"]) && $_POST["action"] === "form_article"){  //addArticle doit etre ecrit pareille que dans add_article
+		$articletitle = $title = $_POST["title"];
+		$articletext = $text = $_POST["text"];
+		$idarticle = $_GET['id_article'];
 	
-		<fieldset class="action">
-		<button type="submit">Enregistrer</button>
-	</fieldset>
+		$messages = array();
+	if (empty($title)){
+		$messages["title"] = "veuillez saisir un titre";
 
-</form>
-<?php include_once("includes/footer.php");?>
+	}
+	if (empty($text)){
+		$messages["text"] = "veuillez saisir un article";
+	}
+	if (count($messages) === 0){
+		mysql_query("UPDATE articles SET title='" . mysql_real_escape_string($title) ."', text='". mysql_real_escape_string($text)."' WHERE id_article=" . mysql_real_escape_string($idarticle)); //or die(mysql_error());exit;(pour voir les erreur dans mysql
+		header("location: gestion_articles.php");
+	}
+}	
+			
+		
+	if (isset($_GET["action"]) && $_GET["action"] === "delete_article"){
+		mysql_query('DELETE FROM articles WHERE id_article=' . mysql_real_escape_string($_GET['id_article']));
+	
+		header("location: gestion_articles.php");
+	}	
+
+include_once("includes/header.php");
+require_once('views/edit_article.view.php');
+include_once("includes/footer.php");
